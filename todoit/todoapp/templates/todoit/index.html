@@ -1,0 +1,58 @@
+{% extends 'todoit/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <div django-app="TaskManager">
+        <div class="container">
+            <div class="content bg-light">
+                <h1 class="text-center">TodoIt App</h1>
+                <p class="tagline text-center">a Django todo app</p>
+                <div class="d-flex justify-content-center p-4 mt-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="text" id="description" class="form-control" placeholder="What do you need to do?" name="description" required>
+                            <label for="description">Description</label>
+                        </div>
+                        <div class="form-group">
+                            <i class="fa fa-caret-down selectArrow"></i>
+                            <select name="category_select" id="category" class="form-control">
+                                <option class="disabled" value="">Choose a category</option>
+                                {% for category in categories %}
+                                    <option class="" value="{{ category.name }}" name="{{category.name}}">{{category.name}}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="category">Category</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" name="date" class="form-control" id="dueDate">
+                            <label for="dueDate">Due Date</label>
+                        </div>
+                        <div class="form-group form-inline">
+                            <button class="btn btn-primary m-1" name="taskAdd" type="submit"> <img src="{% static 'bootstrap/bootstrap_icons/plus.svg' %}" alt="" srcset="" height="16" width="16"> Add task</button>
+                            <button class="btn btn-danger m-1" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"> <img src="{% static 'bootstrap/bootstrap_icons/trash.svg' %}" width="16" height="16"> Delete Tasks</button>
+                        </div>
+                        <div class="form-group form-check">
+                            <ul class="list-group">
+                                {% for todo in todos %}
+                                    <li class="list-group-item">
+                                        <input type="checkbox" class="form-check-input" name="checkedbox" id="{{todo.id}}" value="{{todo.id}}">
+                                        <label for="{{todo.id}}" class="form-check-label"><strong>{{ todo.task_name }}</strong></label>
+                                        <span class="text-warning">{{todo.category}}</span>
+                                        <span><img src="{% static 'bootstrap/bootstrap_icons/calendar-event.svg' %}" width="16" height="16"> {{todo.created}} - {{ todo.due_date }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+
+
+{% endblock content %}
