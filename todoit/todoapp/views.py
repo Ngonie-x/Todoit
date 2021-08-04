@@ -25,6 +25,7 @@ def index(request):
             # Delete a todo
             checkedlist = request.POST["checkedbox"]
             for todo_id in checkedlist:
+
                 print(todo_id)
                 todo = ToDo.objects.get(id=int(todo_id))
                 todo.delete()
