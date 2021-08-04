@@ -15,3 +15,4 @@ A simple django to-do list application
 
 ## Interface
 
+![Screenshot (35)](https://user-images.githubusercontent.com/28601809/128235403-869bf0bc-cbec-4bce-9ed6-8a6c31608049.png)
